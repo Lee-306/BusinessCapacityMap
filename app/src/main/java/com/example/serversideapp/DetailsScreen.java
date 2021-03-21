@@ -11,9 +11,13 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class DetailsScreen extends AppCompatActivity {
 
     DatabaseReference dbRef;
+    ArrayList<Integer> myNumbers = new ArrayList<Integer>();
+
     Business business;
     private EditText name_text, description_text, max_capacity_text, latitude_text, longtitude_text, occupancy_text ;
 
@@ -33,6 +37,13 @@ public class DetailsScreen extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
 
+
+        for (int i =0; i<10; i++) {
+            myNumbers.add(i);
+        }
+
+
+
     }
 
     public void save_details(View view) {
@@ -45,9 +56,9 @@ public class DetailsScreen extends AppCompatActivity {
         Double longtitude = Double.parseDouble(longtitude_text.getText().toString());
 
         //business = new Business("PJ's Pub 3",100,"Pub owned by pj",53.26749733782147,-7.828069925308228,50);
-        business =new Business(name, max_capacity ,description, latitude, longtitude, occupancy );
+        business =new Business(name, max_capacity ,description, latitude, longtitude, occupancy , myNumbers);
 
-        dbRef = FirebaseDatabase.getInstance().getReference().child("Business_DB").child("pj_pub1");
+        dbRef = FirebaseDatabase.getInstance().getReference().child("Business_DB").child("pj_pub2");
 
         dbRef.setValue(business);
 

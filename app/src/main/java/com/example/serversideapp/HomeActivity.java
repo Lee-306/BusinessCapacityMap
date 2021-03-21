@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         Button logoutBtn = findViewById(R.id.idBtnLogout);
 
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        Toast.makeText(this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + currentFirebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
 
 
 
@@ -58,4 +58,20 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     } // end on create
+
+
+    public void go_to_test(View view) {
+        Intent intent = new Intent(this, testUpdate.class);
+        startActivity(intent);
+    }
+
+    public void go_to_details(View view) {
+        Intent intent = new Intent(this, DetailsScreen.class);
+        startActivity(intent);
+    }
+
+    public void go_to_counter_screen(View view) {
+        Intent intent = new Intent(this, Counter.class);
+        startActivity(intent);
+    }
 }

@@ -25,11 +25,11 @@ public class testUpdate extends AppCompatActivity {
 
         myRef.setValue("Hello, World! 3");
 
-       business = new Business("PJ's Pub 3",100,"Pub owned by pj",53.26749733782147,-7.828069925308228,50);
+      /* business = new Business("PJ's Pub 3",100,"Pub owned by pj",53.26749733782147,-7.828069925308228,50);
 
        dbRef = FirebaseDatabase.getInstance().getReference().child("Business_DB").child("pj_pub111");
 
-       dbRef.setValue(business);
+       dbRef.setValue(business);*/
 
 
 

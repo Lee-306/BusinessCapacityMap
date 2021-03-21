@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".HomeActivity">
 
-    <!--welcome message in text view-->
-    <TextView
-        android:id="@+id/idheadTV"
+    <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:padding="10dp"
-        android:text="Geeks for Geeks \n Welcome to Home Screendddd"
-        android:textAlignment="center"
-        android:textColor="@color/purple_500"
-        android:textSize="20sp" />
+        android:onClick="go_to_test"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/details_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="go_to_details"
+        android:text="details screen" />
+
+    <Button
+        android:id="@+id/counter_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="go_to_counter_screen"
+        android:text="Counter screen" />
 
     <!--Button for logout from the app-->
     <Button
         android:id="@+id/idBtnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/idheadTV"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:text="Logout"
         android:textAllCaps="false" />
 
-</RelativeLayout>
+</LinearLayout>
