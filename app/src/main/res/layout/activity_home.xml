@@ -13,11 +13,20 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="10dp"
-        android:text="Server side app\n Welcome to the server side app :)"
+        android:text="Geeks for Geeks \n Welcome to Home Screendddd"
         android:textAlignment="center"
-        android:textColor="#400080"
+        android:textColor="@color/purple_500"
         android:textSize="20sp" />
 
-
+    <!--Button for logout from the app-->
+    <Button
+        android:id="@+id/idBtnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idheadTV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Logout"
+        android:textAllCaps="false" />
 
 </RelativeLayout>
