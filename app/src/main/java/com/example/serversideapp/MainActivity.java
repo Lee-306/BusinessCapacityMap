@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     // declaring a const int value which we 
     // will be using in Firebase auth. 
-    public static final int RC_SIGN_IN = 1;
+    public static final int RC_SIGN_IN = 1001;
 
     // creating an auth listener for our Firebase auth 
     private FirebaseAuth.AuthStateListener mAuthStateListner;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
             // below line is used for adding google
             // authentication builder in our app.
-            //new AuthUI.IdpConfig.GoogleBuilder().build(),
+            new AuthUI.IdpConfig.GoogleBuilder().build(),
 
             // below line is used for adding phone
             // authentication builder in our app.
