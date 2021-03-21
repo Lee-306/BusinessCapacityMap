@@ -1,5 +1,7 @@
 package com.example.serversideapp;
 
+import java.util.ArrayList;
+
 public class Business {
 
     private String business_name;
@@ -9,17 +11,29 @@ public class Business {
     private Double longtitude;
     private int occupancy;
 
+    public ArrayList<Integer> getMyNumbers() {
+        return myNumbers;
+    }
+
+    public void setMyNumbers(ArrayList<Integer> myNumbers) {
+        this.myNumbers = myNumbers;
+    }
+
+    private ArrayList<Integer> myNumbers;
+
+
     public Business() {
 
     }
 
-    public Business(String business_name, int max_capicity, String description, Double latitude, Double longtitude, int occupancy) {
+    public Business(String business_name, int max_capicity, String description, Double latitude, Double longtitude, int occupancy, ArrayList<Integer> myNumbers) {
         this.business_name = business_name;
         this.max_capicity = max_capicity;
         this.description = description;
         this.latitude = latitude;
         this.longtitude = longtitude;
         this.occupancy = occupancy;
+        this.myNumbers = myNumbers;
     }
 
 

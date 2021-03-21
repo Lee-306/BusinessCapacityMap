@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
             // below line is used for adding google
             // authentication builder in our app.
-            new AuthUI.IdpConfig.GoogleBuilder().build(),
+            //new AuthUI.IdpConfig.GoogleBuilder().build(),
 
             // below line is used for adding phone
             // authentication builder in our app.
-            new AuthUI.IdpConfig.PhoneBuilder().build());
+            new AuthUI.IdpConfig.GoogleBuilder().build());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,4 +132,6 @@ public class MainActivity extends AppCompatActivity {
         // listener method on stop. 
         mFirebaseAuth.removeAuthStateListener(mAuthStateListner);
     }
+
+
 }

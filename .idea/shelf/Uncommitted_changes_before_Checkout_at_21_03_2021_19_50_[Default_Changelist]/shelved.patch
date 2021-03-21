@@ -1,0 +1,185 @@
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\n\r\nbuildscript {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n        \r\n    }\r\n    dependencies {\r\n        classpath 'com.android.tools.build:gradle:4.1.3'\r\n        classpath 'com.google.gms:google-services:4.2.0'\r\n\r\n        // NOTE: Do not place your application dependencies here; they belong\r\n        // in the individual module build.gradle files\r\n    }\r\n}\r\n\r\nallprojects {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n        \r\n    }\r\n}\r\n\r\ntask clean(type: Delete) {\r\n    delete rootProject.buildDir\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision 13696ba34108dd3151288adcf54aeb1e1ffea646)
++++ build.gradle	(date 1616350687522)
+@@ -8,7 +8,7 @@
+     }
+     dependencies {
+         classpath 'com.android.tools.build:gradle:4.1.3'
+-        classpath 'com.google.gms:google-services:4.2.0'
++        classpath 'com.google.gms:google-services:4.3.5'
+ 
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+Index: app/src/main/java/com/example/serversideapp/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.serversideapp;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.firebase.ui.auth.AuthUI;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\n\r\nimport java.util.Arrays;\r\nimport java.util.List;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    // variable for Firebase Auth \r\n    private FirebaseAuth mFirebaseAuth;\r\n\r\n    // declaring a const int value which we \r\n    // will be using in Firebase auth. \r\n    public static final int RC_SIGN_IN = 1001;\r\n\r\n    // creating an auth listener for our Firebase auth \r\n    private FirebaseAuth.AuthStateListener mAuthStateListner;\r\n\r\n    // below is the list which we have created in which  \r\n    // we can add the authentication which we have to  \r\n    // display inside our app. \r\n    List<AuthUI.IdpConfig> providers = Arrays.asList(\r\n\r\n            // below is the line for adding  \r\n            // email and password authentication. \r\n            new AuthUI.IdpConfig.EmailBuilder().build(),\r\n\r\n            // below line is used for adding google\r\n            // authentication builder in our app.\r\n            new AuthUI.IdpConfig.GoogleBuilder().build(),\r\n\r\n            // below line is used for adding phone\r\n            // authentication builder in our app.\r\n            new AuthUI.IdpConfig.PhoneBuilder().build());\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        // below line is for getting instance  \r\n        // for our firebase auth \r\n        mFirebaseAuth = FirebaseAuth.getInstance();\r\n\r\n        // below line is used for calling auth listener \r\n        // for oue Firebase authentication. \r\n        mAuthStateListner = new FirebaseAuth.AuthStateListener() {\r\n            @SuppressLint(\"ResourceType\")\r\n            @Override\r\n            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {\r\n\r\n                // we are calling method for on authentication state changed. \r\n                // below line is used for getting current user which is \r\n                // authenticated previously. \r\n                FirebaseUser user = firebaseAuth.getCurrentUser();\r\n\r\n                // checking if the user  \r\n                // is null or not. \r\n                if (user != null) {\r\n                    // if the user is already authenticated then we will \r\n                    // redirect our user to next screen which is our home screen. \r\n                    // we are redirecting to new screen via an intent. \r\n                    Intent i = new Intent(MainActivity.this, HomeActivity.class);\r\n                    startActivity(i);\r\n                    // we are calling finish method to kill or  \r\n                    // mainactivity which is displaying our login ui. \r\n                    finish();\r\n                } else {\r\n                    // this method is called when our  \r\n                    // user is not authenticated previously. \r\n                    startActivityForResult(\r\n                            // below line is used for getting  \r\n                            // our authentication instance. \r\n                            AuthUI.getInstance()\r\n                                    // below line is used to  \r\n                                    // create our sign in intent \r\n                                    .createSignInIntentBuilder()\r\n\r\n                                    // below line is used for adding smart  \r\n                                    // lock for our authentication. \r\n                                    // smart lock is used to check if the user  \r\n                                    // is authentication through different devices. \r\n                                    // currently we are disabling it. \r\n                                    .setIsSmartLockEnabled(false)\r\n\r\n                                    // we are adding different login providers which \r\n                                    // we have mentioned above in our list. \r\n                                    // we can add more providers according to our  \r\n                                    // requirement which are available in firebase. \r\n                                    .setAvailableProviders(providers)\r\n\r\n                                    // below line is for customizing our theme for  \r\n                                    // login screen and set logo method is used for \r\n                                    // adding logo for our login page. \r\n                                    .setLogo(R.drawable.map_logo).setTheme(R.style.Theme)\r\n\r\n                                    // after setting our theme and logo  \r\n                                    // we are calling a build() method  \r\n                                    // to build our login screen. \r\n                                    .build(),\r\n                            // and lastly we are passing our const  \r\n                            // integer which is declared above. \r\n                            RC_SIGN_IN\r\n                    );\r\n                }\r\n            }\r\n        };\r\n    }\r\n\r\n    @Override\r\n    protected void onResume() {\r\n        super.onResume();\r\n        // we are calling our auth  \r\n        // listener method on app resume. \r\n        mFirebaseAuth.addAuthStateListener(mAuthStateListner);\r\n    }\r\n\r\n    @Override\r\n    protected void onPause() {\r\n        super.onPause();\r\n        // here we are calling remove auth  \r\n        // listener method on stop. \r\n        mFirebaseAuth.removeAuthStateListener(mAuthStateListner);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/serversideapp/MainActivity.java	(revision 13696ba34108dd3151288adcf54aeb1e1ffea646)
++++ app/src/main/java/com/example/serversideapp/MainActivity.java	(date 1616356013333)
+@@ -16,100 +16,100 @@
+ 
+ public class MainActivity extends AppCompatActivity {
+ 
+-    // variable for Firebase Auth 
++    // variable for Firebase Auth
+     private FirebaseAuth mFirebaseAuth;
+ 
+-    // declaring a const int value which we 
+-    // will be using in Firebase auth. 
++    // declaring a const int value which we
++    // will be using in Firebase auth.
+     public static final int RC_SIGN_IN = 1001;
+ 
+-    // creating an auth listener for our Firebase auth 
++    // creating an auth listener for our Firebase auth
+     private FirebaseAuth.AuthStateListener mAuthStateListner;
+ 
+-    // below is the list which we have created in which  
+-    // we can add the authentication which we have to  
+-    // display inside our app. 
++    // below is the list which we have created in which
++    // we can add the authentication which we have to
++    // display inside our app.
+     List<AuthUI.IdpConfig> providers = Arrays.asList(
+ 
+-            // below is the line for adding  
+-            // email and password authentication. 
++            // below is the line for adding
++            // email and password authentication.
+             new AuthUI.IdpConfig.EmailBuilder().build(),
+ 
+             // below line is used for adding google
+             // authentication builder in our app.
+-            new AuthUI.IdpConfig.GoogleBuilder().build(),
++            new AuthUI.IdpConfig.GoogleBuilder().build());
+ 
+             // below line is used for adding phone
+             // authentication builder in our app.
+-            new AuthUI.IdpConfig.PhoneBuilder().build());
++            //new AuthUI.IdpConfig.PhoneBuilder().build());
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+ 
+-        // below line is for getting instance  
+-        // for our firebase auth 
++        // below line is for getting instance
++        // for our firebase auth
+         mFirebaseAuth = FirebaseAuth.getInstance();
+ 
+-        // below line is used for calling auth listener 
+-        // for oue Firebase authentication. 
++        // below line is used for calling auth listener
++        // for oue Firebase authentication.
+         mAuthStateListner = new FirebaseAuth.AuthStateListener() {
+             @SuppressLint("ResourceType")
+             @Override
+             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+ 
+-                // we are calling method for on authentication state changed. 
+-                // below line is used for getting current user which is 
+-                // authenticated previously. 
++                // we are calling method for on authentication state changed.
++                // below line is used for getting current user which is
++                // authenticated previously.
+                 FirebaseUser user = firebaseAuth.getCurrentUser();
+ 
+-                // checking if the user  
+-                // is null or not. 
++                // checking if the user
++                // is null or not.
+                 if (user != null) {
+-                    // if the user is already authenticated then we will 
+-                    // redirect our user to next screen which is our home screen. 
+-                    // we are redirecting to new screen via an intent. 
++                    // if the user is already authenticated then we will
++                    // redirect our user to next screen which is our home screen.
++                    // we are redirecting to new screen via an intent.
+                     Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                     startActivity(i);
+-                    // we are calling finish method to kill or  
+-                    // mainactivity which is displaying our login ui. 
++                    // we are calling finish method to kill or
++                    // mainactivity which is displaying our login ui.
+                     finish();
+                 } else {
+-                    // this method is called when our  
+-                    // user is not authenticated previously. 
++                    // this method is called when our
++                    // user is not authenticated previously.
+                     startActivityForResult(
+-                            // below line is used for getting  
+-                            // our authentication instance. 
++                            // below line is used for getting
++                            // our authentication instance.
+                             AuthUI.getInstance()
+-                                    // below line is used to  
+-                                    // create our sign in intent 
++                                    // below line is used to
++                                    // create our sign in intent
+                                     .createSignInIntentBuilder()
+ 
+-                                    // below line is used for adding smart  
+-                                    // lock for our authentication. 
+-                                    // smart lock is used to check if the user  
+-                                    // is authentication through different devices. 
+-                                    // currently we are disabling it. 
++                                    // below line is used for adding smart
++                                    // lock for our authentication.
++                                    // smart lock is used to check if the user
++                                    // is authentication through different devices.
++                                    // currently we are disabling it.
+                                     .setIsSmartLockEnabled(false)
+ 
+-                                    // we are adding different login providers which 
+-                                    // we have mentioned above in our list. 
+-                                    // we can add more providers according to our  
+-                                    // requirement which are available in firebase. 
++                                    // we are adding different login providers which
++                                    // we have mentioned above in our list.
++                                    // we can add more providers according to our
++                                    // requirement which are available in firebase.
+                                     .setAvailableProviders(providers)
+ 
+-                                    // below line is for customizing our theme for  
+-                                    // login screen and set logo method is used for 
+-                                    // adding logo for our login page. 
++                                    // below line is for customizing our theme for
++                                    // login screen and set logo method is used for
++                                    // adding logo for our login page.
+                                     .setLogo(R.drawable.map_logo).setTheme(R.style.Theme)
+ 
+-                                    // after setting our theme and logo  
+-                                    // we are calling a build() method  
+-                                    // to build our login screen. 
++                                    // after setting our theme and logo
++                                    // we are calling a build() method
++                                    // to build our login screen.
+                                     .build(),
+-                            // and lastly we are passing our const  
+-                            // integer which is declared above. 
++                            // and lastly we are passing our const
++                            // integer which is declared above.
+                             RC_SIGN_IN
+                     );
+                 }
+@@ -125,6 +125,8 @@
+         mFirebaseAuth.addAuthStateListener(mAuthStateListner);
+     }
+ 
++
++
+     @Override
+     protected void onPause() {
+         super.onPause();
