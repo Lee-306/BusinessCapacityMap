@@ -1,6 +1,7 @@
 package com.example.serversideapp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Business {
 
@@ -10,30 +11,39 @@ public class Business {
     private Double latitude;
     private Double longtitude;
     private int occupancy;
+    //private ArrayList<Integer> myNumbers;
 
-    public ArrayList<Integer> getMyNumbers() {
-        return myNumbers;
+    public List<String> getTags() {
+        return tags;
     }
 
-    public void setMyNumbers(ArrayList<Integer> myNumbers) {
-        this.myNumbers = myNumbers;
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
-    private ArrayList<Integer> myNumbers;
+    private List<String>tags;
+
+
+
+
+
+
+
 
 
     public Business() {
 
     }
 
-    public Business(String business_name, int max_capicity, String description, Double latitude, Double longtitude, int occupancy, ArrayList<Integer> myNumbers) {
+    public Business(String business_name, int max_capicity, String description, Double latitude, Double longtitude, int occupancy,List<String>tags) {
         this.business_name = business_name;
         this.max_capicity = max_capicity;
         this.description = description;
         this.latitude = latitude;
         this.longtitude = longtitude;
         this.occupancy = occupancy;
-        this.myNumbers = myNumbers;
+        //this.myNumbers = myNumbers;
+        this.tags = tags;
     }
 
 
@@ -84,4 +94,10 @@ public class Business {
     public void setOccupency(int occupency) {
         this.occupancy = occupency;
     }
+
+    //public ArrayList<Integer> getMyNumbers() {
+       // return myNumbers;
+
+
+
 }

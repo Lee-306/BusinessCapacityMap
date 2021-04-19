@@ -14,9 +14,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeActivity extends AppCompatActivity {
-
+    public static String id;
+    Business business;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +27,17 @@ public class HomeActivity extends AppCompatActivity {
 
         // button for logout and initialing our button.
         Button logoutBtn = findViewById(R.id.idBtnLogout);
-
+        business = new Business();
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        Toast.makeText(this, "" + currentFirebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
-
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Business_DB");
+        //ref.child(currentFirebaseUser.getUid()).setValue(business) ;
+        /*if (currentFirebaseUser!= null) {
+            String UID = currentFirebaseUser.getUid();
+        } else {
+            // No user is signed in
+        }*/
+        //Toast.makeText(this, "" + currentFirebaseUser.getDisplayName(), Toast.LENGTH_SHORT).show();
+        //String id = currentFirebaseUser.getUid();
 
 
 
@@ -66,12 +76,16 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void go_to_details(View view) {
-        Intent intent = new Intent(this, DetailsScreen.class);
+        Intent intent = new Intent(this,DetailsScreen.class);
         startActivity(intent);
     }
 
     public void go_to_counter_screen(View view) {
         Intent intent = new Intent(this, Counter.class);
+        startActivity(intent);
+    }
+    public void go_to_tags_screen(View view) {
+        Intent intent = new Intent(this, SavedUser.class);
         startActivity(intent);
     }
 }

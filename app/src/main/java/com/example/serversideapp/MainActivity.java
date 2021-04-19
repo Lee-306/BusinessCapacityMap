@@ -115,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+        //Intent i = new Intent(MainActivity.this, DetailsScreen.class);
+        //startActivity(i);
     }
 
     @Override
