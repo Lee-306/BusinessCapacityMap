@@ -5,62 +5,40 @@ import java.util.List;
 
 public class Business {
 
-    private String business_name;
-    private int max_capicity;
-    private String description;
-    private Double latitude;
-    private Double longtitude;
-    private int occupancy;
-    //private ArrayList<Integer> myNumbers;
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
-    private List<String>tags;
-
-
-
-
-
-
-
-
+    public double latitude;
+    public double longitude;
+    public String description;
+    public int capacity;
+    public int occupancy;
 
     public Business() {
 
     }
 
-    public Business(String business_name, int max_capicity, String description, Double latitude, Double longtitude, int occupancy,List<String>tags) {
-        this.business_name = business_name;
-        this.max_capicity = max_capicity;
-        this.description = description;
+
+
+    public Business(double latitude, double longitude, String description, int capacity, int occupancy) {
         this.latitude = latitude;
-        this.longtitude = longtitude;
+        this.longitude = longitude;
+        this.description = description;
+        this.capacity = capacity;
         this.occupancy = occupancy;
-        //this.myNumbers = myNumbers;
-        this.tags = tags;
     }
 
-
-    public String getBusiness_name() {
-        return business_name;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setBusiness_name(String business_name) {
-        this.business_name = business_name;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
-    public int getMax_capicity() {
-        return max_capicity;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setMax_capicity(int max_capicity) {
-        this.max_capicity = max_capicity;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public String getDescription() {
@@ -71,33 +49,31 @@ public class Business {
         this.description = description;
     }
 
-    public Double getLatitude() {
-        return latitude;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
-    public Double getLongtitude() {
-        return longtitude;
-    }
-
-    public void setLongtitude(Double longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public int getOccupency() {
+    public int getOccupancy() {
         return occupancy;
     }
 
-    public void setOccupency(int occupency) {
-        this.occupancy = occupency;
+    public void setOccupancy(int occupancy) {
+        this.occupancy = occupancy;
     }
 
-    //public ArrayList<Integer> getMyNumbers() {
-       // return myNumbers;
-
-
+    @Override
+    public String toString() {
+        return "Business{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", description='" + description + '\'' +
+                ", capacity=" + capacity +
+                ", occupancy=" + occupancy +
+                '}';
+    }
 
 }

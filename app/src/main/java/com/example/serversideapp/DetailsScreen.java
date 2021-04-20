@@ -38,7 +38,7 @@ public class DetailsScreen extends AppCompatActivity {
 
 
     Business business;
-    private EditText tag_text, business_name_text, description_text, max_capacity_text, latitude_text, longtitude_text, occupancy_text;
+    private EditText business_name_text, description_text, max_capacity_text, latitude_text, longtitude_text, occupancy_text;
     private TextView welcomeText;
 
     @Override
@@ -48,13 +48,13 @@ public class DetailsScreen extends AppCompatActivity {
 
         //text views
         welcomeText = findViewById(R.id.welcomeText);
-        business_name_text = findViewById(R.id.business_name_text);
+        //business_name_text = findViewById(R.id.business_name_text);
         description_text = findViewById(R.id.description_text);
         max_capacity_text = findViewById(R.id.max_capacity_text);
         latitude_text = findViewById(R.id.latitude_text);
         longtitude_text = findViewById(R.id.longtitude_text);
         occupancy_text = findViewById(R.id.occupancy_text);
-        tag_text = findViewById(R.id.tag_text);
+        //tag_text = findViewById(R.id.tag_text);
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -75,13 +75,14 @@ public class DetailsScreen extends AppCompatActivity {
                                 business_data = dataSnapshot.getValue(Business.class);
 
                                 //loading the data from firebase into textboxes
-                                business_name_text.setText(business_data.getBusiness_name());
+                                //business_name_text.setText(business_data.getBusiness_name());
                                 description_text.setText(business_data.getDescription());
-                                max_capacity_text.setText(String.valueOf(business_data.getMax_capicity()));
-                                latitude_text.setText(String.valueOf(business_data.getLatitude().toString()));
-                                longtitude_text.setText(String.valueOf(business_data.getLongtitude().toString()));
-                                occupancy_text.setText(String.valueOf(business_data.getOccupency()));
-                                tag_text.setText(String.valueOf(business_data.getTags()));
+                                //max_capacity_text.setText(String.valueOf(business_data.getCapacity()));
+                                max_capacity_text.setText(String.valueOf(business_data.getCapacity()));
+                                latitude_text.setText(String.valueOf(business_data.getLatitude()));
+                                longtitude_text.setText(String.valueOf(business_data.getLongitude()));
+                                occupancy_text.setText(String.valueOf(business_data.getOccupancy()));
+                                //tag_text.setText(String.valueOf(business_data.getTags()));
 
                                // List<String> tags=business_data.getTags();
 
@@ -107,10 +108,10 @@ public class DetailsScreen extends AppCompatActivity {
     public void save_details(View view) {
         //save stuff
         //Check there are no empty texboxes
-        if (TextUtils.isEmpty(business_name_text.getText().toString())) {
-            Toast.makeText(DetailsScreen.this, "Please enter Business name",
-                    Toast.LENGTH_SHORT).show();
-        }
+//        if (TextUtils.isEmpty(business_name_text.getText().toString())) {
+//            Toast.makeText(DetailsScreen.this, "Please enter Business name",
+//                    Toast.LENGTH_SHORT).show();
+//        }
         if (TextUtils.isEmpty(description_text.getText().toString())) {
             Toast.makeText(DetailsScreen.this, "Please enter Business description",
                     Toast.LENGTH_SHORT).show();
@@ -132,16 +133,16 @@ public class DetailsScreen extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         } else {
 
-            String name = business_name_text.getText().toString();
+            //String name = business_name_text.getText().toString();
             String description = description_text.getText().toString();
             int max_capacity = Integer.parseInt(max_capacity_text.getText().toString());
             int occupancy = Integer.parseInt(occupancy_text.getText().toString());
             Double latitude = Double.parseDouble(latitude_text.getText().toString());
-            Double longtitude = Double.parseDouble(longtitude_text.getText().toString());
-            List<String> tags = Arrays.asList(tag_text.getText().toString().split(","));
+            Double longitude = Double.parseDouble(longtitude_text.getText().toString());
+            //List<String> tags = Arrays.asList(tag_text.getText().toString().split(","));
             //toString().split("\\s*,\\s*"));
 
-            business = new Business(name, max_capacity, description, latitude, longtitude, occupancy, tags);
+            business = new Business(latitude, longitude, description, max_capacity, occupancy);
             //get the current signed in user and add the business details as a child node under their user uid
             FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             dbRef = FirebaseDatabase.getInstance().getReference().child("Business_DB").child(currentFirebaseUser.getUid());

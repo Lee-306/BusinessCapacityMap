@@ -8,7 +8,7 @@
     tools:context=".Counter">
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/count_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="0"
@@ -58,6 +58,44 @@
             android:onClick="increase_by_two"
             android:text="+2" />
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/text_input_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="number" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="add_custom"
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/subtract_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="subtract_custom"
+            android:text="Subtract" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/reset_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="reset_count"
+        android:text="Reset count to zero" />
 
 
 </LinearLayout>
